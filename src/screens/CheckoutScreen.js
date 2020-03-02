@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, FlatList } from 'react-native';
+import { View, Text, StyleSheet, FlatList, ScrollView } from 'react-native';
 
 export default class CheckoutScreen extends Component {
 
@@ -17,6 +17,7 @@ export default class CheckoutScreen extends Component {
             );
         }
         return (
+            <ScrollView>
             <View style={styles.mainContainer}>
                 <Text style={styles.totalText}>Final Order Details</Text>
                 <View style={styles.headContainer}>
@@ -25,22 +26,26 @@ export default class CheckoutScreen extends Component {
                     <Text style={styles.priceh}>Item Price</Text>
                     <Text style={styles.statush}>Status</Text>
                 </View>
-                <FlatList
-                    data={it}
-                    renderItem={renderTable}
-                    keyExtractor={(item, index) => index.toString()}
-                />
+                <View style={styles.data}>
+                    <FlatList
+                        data={it}
+                        renderItem={renderTable}
+                        keyExtractor={(item, index) => index.toString()}
+                    />
+                </View>
+
                 <View style={styles.final}>
                     <Text style={styles.totalText}>total: {total}</Text>
                 </View>
             </View>
+            </ScrollView>
         );
     }
 }
 
 const styles = StyleSheet.create({
     mainContainer: { flex: 1, backgroundColor: '#35FF7B', },
-    headContainer: { flex: 1, flexDirection: 'row' },
+    headContainer: { flex: 1, flexDirection: 'row', height: 100, },
     qtyh: { width: '10%', color: '#000', fontSize: 35, fontWeight: 'bold', marginHorizontal: 10 },
     titleh: { width: '40%', color: '#000', fontSize: 35, fontWeight: 'bold', marginHorizontal: 10 },
     priceh: { width: '20%', color: '#000', fontSize: 35, fontWeight: 'bold', marginHorizontal: 10 },
@@ -52,5 +57,6 @@ const styles = StyleSheet.create({
     price: { width: '50%', color: '#FF35F3', fontSize: 25, fontWeight: '600', marginHorizontal: 10 },
     totalText: { color: '#FF4A35', fontWeight: 'bold', fontSize: 33, alignSelf: 'center' },
 
-    final: {flex: 1},
+    final: { flex: 1 },
+    // data: {height: 500},
 })
