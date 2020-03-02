@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, FlatList, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, FlatList, SafeAreaView } from 'react-native';
 
 export default class CheckoutScreen extends Component {
 
     render() {
-        // console.log(JSON.stringify(this.props))
         const { it } = this.props.route.params;
         const { total } = this.props.route.params;
         const renderTable = itemData => {
@@ -16,29 +15,29 @@ export default class CheckoutScreen extends Component {
                 </View>
             );
         }
-        return (
-            <ScrollView>
-            <View style={styles.mainContainer}>
-                <Text style={styles.totalText}>Final Order Details</Text>
-                <View style={styles.headContainer}>
-                    <Text style={styles.qtyh}>Qty</Text>
-                    <Text style={styles.titleh}>Item Name</Text>
-                    <Text style={styles.priceh}>Item Price</Text>
-                    <Text style={styles.statush}>Status</Text>
-                </View>
-                <View style={styles.data}>
-                    <FlatList
-                        data={it}
-                        renderItem={renderTable}
-                        keyExtractor={(item, index) => index.toString()}
-                    />
-                </View>
+        return ( 
+            <SafeAreaView style={{ flex: 1 }}>
+                    <View style={styles.mainContainer}>
+                        <Text style={styles.totalText}>Final Order Details</Text>
+                        <View style={styles.headContainer}>
+                            <Text style={styles.qtyh}>Qty</Text>
+                            <Text style={styles.titleh}>Item Name</Text>
+                            <Text style={styles.priceh}>Item Price</Text>
+                            <Text style={styles.statush}>Status</Text>
+                        </View>
+                        <View style={styles.data}>
+                            <FlatList
+                                data={it}
+                                renderItem={renderTable}
+                                keyExtractor={(item, index) => index.toString()}
+                            />
+                        </View>
 
-                <View style={styles.final}>
-                    <Text style={styles.totalText}>total: {total}</Text>
-                </View>
-            </View>
-            </ScrollView>
+                        <View style={styles.final}>
+                            <Text style={styles.totalText}>total: {total}</Text>
+                        </View>
+                    </View>
+            </SafeAreaView>
         );
     }
 }
