@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, FlatList, Button } from 'react-native';
-
 import { CATEGORIES } from '../../dummy-data';
 import Tile from '../components/Tile';
 
@@ -20,21 +19,49 @@ export default class HomeScreen extends Component {
           title={itemData.item.title}
           color={itemData.item.color}
           onSelect={() => {
-            this.setState({
-              items: [...this.state.items, {
-                qty: 1,
-                title: itemData.item.title,
-                price: itemData.item.price,
-              }],
-              total: this.state.total + itemData.item.price
-            });
+            let data = this.state.items;
+           
+            for(let i = 0; i < data.length; i++){
+              if(data[i].title === itemData.item.title) {
+                data[i].qty = data[i].qty+1;
+                data[i].title = data[i].title;
+                data[i].price = data[i].price + itemData.item.price;
+                this.setState({
+                  items: data,
+                  total: this.state.total + itemData.item.price
+                })
+
+                break;
+                // alert("hi")
+              } else {
+                // alert("new entry")
+                this.setState({
+                  items: [...this.state.items, {
+                    qty: 1,
+                    title: itemData.item.title,
+                    price: itemData.item.price,
+                  }],
+                  total: this.state.total + itemData.item.price
+                });
+              }
+            }
+            if(data.length === 0) {
+              this.setState({
+                items: [...this.state.items, {
+                  qty: 1,
+                  title: itemData.item.title,
+                  price: itemData.item.price,
+                }],
+                total: this.state.total + itemData.item.price
+              });
+            }
+           
           }}
         />
       );
     };
 
     const renderTable = itemData => {
-      // console.log(itemData);
       return (
         <View style={styles.dataContainer}>
           <Text style={styles.qty}>{itemData.item.qty}</Text>
@@ -51,7 +78,6 @@ export default class HomeScreen extends Component {
             renderItem={renderTable}
             keyExtractor={(item, index) => index.toString()}
           />
-
           <Text style={styles.totalText}>total: {this.state.total}</Text>
         </View>
         <View style={styles.tileContainer}>

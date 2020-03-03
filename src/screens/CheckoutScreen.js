@@ -17,26 +17,25 @@ export default class CheckoutScreen extends Component {
         }
         return ( 
             <SafeAreaView style={{ flex: 1 }}>
-                    <View style={styles.mainContainer}>
-                        <Text style={styles.totalText}>Final Order Details</Text>
-                        <View style={styles.headContainer}>
-                            <Text style={styles.qtyh}>Qty</Text>
-                            <Text style={styles.titleh}>Item Name</Text>
-                            <Text style={styles.priceh}>Item Price</Text>
-                            <Text style={styles.statush}>Status</Text>
-                        </View>
-                        <View style={styles.data}>
-                            <FlatList
-                                data={it}
-                                renderItem={renderTable}
-                                keyExtractor={(item, index) => index.toString()}
-                            />
-                        </View>
-
-                        <View style={styles.final}>
-                            <Text style={styles.totalText}>total: {total}</Text>
-                        </View>
+                <View style={styles.mainContainer}>
+                    <Text style={styles.totalText}>Final Order Details</Text>
+                    <View style={styles.headContainer}>
+                        <Text style={styles.qtyh}>Qty</Text>
+                        <Text style={styles.titleh}>Item Name</Text>
+                        <Text style={styles.priceh}>Item Price</Text>
+                        <Text style={styles.statush}>Status</Text>
                     </View>
+                    <View style={styles.data}>
+                        <FlatList
+                            data={it}
+                            renderItem={renderTable}
+                            keyExtractor={(item, index) => index.toString()}
+                        />
+                    </View>
+                    <View style={styles.final}>
+                        <Text style={styles.totalText}>total: {total}</Text>
+                    </View>
+                </View>
             </SafeAreaView>
         );
     }
@@ -57,5 +56,5 @@ const styles = StyleSheet.create({
     totalText: { color: '#FF4A35', fontWeight: 'bold', fontSize: 33, alignSelf: 'center' },
 
     final: { flex: 1 },
-    // data: {height: 500},
+    data: {height: 500},
 })
