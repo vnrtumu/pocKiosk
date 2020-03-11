@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, FlatList, SafeAreaView } from 'react-native';
+import { View, Text, StyleSheet, FlatList, SafeAreaView, Button } from 'react-native';
 
 export default class CheckoutScreen extends Component {
 
@@ -15,7 +15,7 @@ export default class CheckoutScreen extends Component {
                 </View>
             );
         }
-        return ( 
+        return (
             <SafeAreaView style={{ flex: 1 }}>
                 <View style={styles.mainContainer}>
                     <Text style={styles.totalText}>Final Order Details</Text>
@@ -34,6 +34,9 @@ export default class CheckoutScreen extends Component {
                     </View>
                     <View style={styles.final}>
                         <Text style={styles.totalText}>total: {total}</Text>
+                        <Button title="Pdf Download" onPress={() => {
+                            this.props.navigation.navigate('Pdf', { items: it, final: total })
+                        }} />
                     </View>
                 </View>
             </SafeAreaView>
@@ -56,5 +59,5 @@ const styles = StyleSheet.create({
     totalText: { color: '#FF4A35', fontWeight: 'bold', fontSize: 33, alignSelf: 'center' },
 
     final: { flex: 1 },
-    data: {height: 500},
+    data: { height: 200 },
 })

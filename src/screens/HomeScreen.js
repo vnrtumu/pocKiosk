@@ -30,11 +30,8 @@ export default class HomeScreen extends Component {
                   items: data,
                   total: this.state.total + itemData.item.price
                 })
-
                 break;
-                // alert("hi")
               } else {
-                // alert("new entry")
                 this.setState({
                   items: [...this.state.items, {
                     qty: 1,
